@@ -1,6 +1,6 @@
 /* Définir une variable pour la hauteur du header */
 :root {
-    --header-height: 100px; /* Tu peux ajuster cette valeur pour changer la hauteur du header */
+    --header-height: 100px;
 }
 
 /* En-tête */
@@ -26,10 +26,23 @@ h1 {
 body, html {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Désactiver le scroll */
     width: 100%;
     background-color: #e3e3d9;
     height: 100%;
+}
+
+/* Désactiver le scroll uniquement sur les grands écrans */
+@media (min-width: 1024px) {
+    body, html {
+        overflow: hidden;
+    }
+}
+
+/* Autoriser le scroll sur les petits écrans */
+@media (max-width: 1023px) {
+    body, html {
+        overflow-y: auto;
+    }
 }
 
 #special-images-container {
@@ -45,15 +58,31 @@ body, html {
     font-family: 'Noto Sans Mono', monospace;
     top: 25%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centrer précisément le bouton */
+    transform: translate(-50%, -50%);
     padding: 10px 20px;
     font-size: 16px;
     background-color: #e3e3d9;
     color: #000000;
     border: none;
     cursor: pointer;
-    z-index: 2000; /* Z-index plus élevé que Special 0 et Special 1 */
+    z-index: 2000;
     transition: background-color 0.3s ease;
+}
+
+/* Adapter la taille du bouton sur mobile */
+@media (max-width: 768px) {
+    #enter-button {
+        font-size: 14px;
+        padding: 8px 16px;
+        top: 20%;
+    }
+}
+
+/* Adapter la taille du bouton sur les grands écrans */
+@media (min-width: 1024px) {
+    #enter-button {
+        top: 25%;
+    }
 }
 
 #enter-button:hover {
@@ -66,11 +95,13 @@ body, html {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(0deg); /* Position initiale centrée et rotation 0 */
-    transition: transform 1s ease, top 1s ease, left 1s ease; /* Transition pour l'animation */
+    transform: translate(-50%, -50%) rotate(0deg);
+    transition: transform 1s ease, top 1s ease, left 1s ease;
 }
 
 .special-image img {
+    max-width: 100%;
+    height: auto;
     display: block;
     cursor: pointer;
 }
@@ -89,14 +120,14 @@ body.enter-active .special-image {
     box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* Style pour le popup */
+/* Popup container */
 .popup-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,7 +145,21 @@ body.enter-active .special-image {
     position: relative;
 }
 
-/* Ratio 3/5 pour le carrousel d'images */
+/* Adaptation du popup pour mobile */
+@media (max-width: 768px) {
+    .popup-content {
+        width: 90vw;
+        height: auto;
+        flex-direction: column;
+    }
+    .popup-carousel {
+        height: 200px;
+    }
+    .popup-text {
+        padding: 10px;
+    }
+}
+
 .popup-carousel {
     flex: 3;
     display: flex;
@@ -147,7 +192,6 @@ body.enter-active .special-image {
     right: 10px;
 }
 
-/* Ratio 2/5 pour la section texte */
 .popup-text {
     flex: 2;
     display: flex;
@@ -169,10 +213,22 @@ body.enter-active .special-image {
     right: 10px;
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 1000; /* La croix est au-dessus de tout dans le popup */
+    z-index: 1000;
 }
 
 /* Montrer le popup */
 .popup-container.active {
     visibility: visible;
+}
+
+/* Ajuster la position des images sur mobile */
+@media (max-width: 768px) {
+    .special-image {
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 20px auto;
+        display: block;
+        position: relative;
+    }
 }
