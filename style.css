@@ -1,0 +1,178 @@
+/* Définir une variable pour la hauteur du header */
+:root {
+    --header-height: 100px; /* Tu peux ajuster cette valeur pour changer la hauteur du header */
+}
+
+/* En-tête */
+header {
+    height: var(--header-height);
+    padding: 10px;
+    text-align: center;
+    background-color: #e3e3d9;
+    border-bottom: 0px solid #e0e0e0;
+}
+
+h1 {
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: lighter;
+    line-height: 1.5;
+    color: #000000;
+    margin-bottom: 1px;
+}
+
+/* Corps de la page */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Désactiver le scroll */
+    width: 100%;
+    background-color: #e3e3d9;
+    height: 100%;
+}
+
+#special-images-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Centrer le bouton "Entrer" au milieu de la page */
+#enter-button {
+    position: absolute;
+    font-family: 'Noto Sans Mono', monospace;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrer précisément le bouton */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #e3e3d9;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    z-index: 2000; /* Z-index plus élevé que Special 0 et Special 1 */
+    transition: background-color 0.3s ease;
+}
+
+#enter-button:hover {
+    background-color: #000000;
+    color: #e3e3d9;
+}
+
+/* Style pour les images spéciales au centre */
+.special-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg); /* Position initiale centrée et rotation 0 */
+    transition: transform 1s ease, top 1s ease, left 1s ease; /* Transition pour l'animation */
+}
+
+.special-image img {
+    display: block;
+    cursor: pointer;
+}
+
+/* Quand on clique sur "Entrer" */
+body.enter-active .special-image {
+    transition: transform 1s ease, top 1s ease, left 1s ease;
+}
+
+/* Ajouter des ombres selon les paramètres JSON */
+.special-image img[data-shadow="content"] {
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
+}
+
+.special-image img[data-shadow="all"] {
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Style pour le popup */
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    z-index: 9999;
+}
+
+.popup-content {
+    display: flex;
+    width: 80vw;
+    height: 60vh;
+    background-color: white;
+    border-radius: 0px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Ratio 3/5 pour le carrousel d'images */
+.popup-carousel {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3;
+    position: relative;
+}
+
+.popup-carousel img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.popup-carousel .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #333;
+    cursor: pointer;
+}
+
+.popup-carousel .arrow-left {
+    left: 10px;
+}
+
+.popup-carousel .arrow-right {
+    right: 10px;
+}
+
+/* Ratio 2/5 pour la section texte */
+.popup-text {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.popup-text h2 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Style pour la croix de fermeture */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000; /* La croix est au-dessus de tout dans le popup */
+}
+
+/* Montrer le popup */
+.popup-container.active {
+    visibility: visible;
+}

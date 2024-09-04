@@ -1,0 +1,356 @@
+{
+    "specialImages": [
+        {
+            "name": "Special 0",
+            "image": "images/specials/special0.png",
+            "size": {
+                "width": "500px",
+                "height": "auto"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.2)",
+                "offsetX": "2px",
+                "offsetY": "4px",
+                "blur": "6px",
+                "spread": "0px",
+                "applyTo": "none"
+            },
+            "position": {
+                "top": "110%",
+                "left": "50%",
+                "zIndex": 1000,
+                "rotation": "0deg"
+            }
+        },
+        {
+            "name": "Special 1",
+            "image": "images/specials/special1.png",
+            "size": {
+                "width": "90px",
+                "height": "auto"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.2)",
+                "offsetX": "2px",
+                "offsetY": "4px",
+                "blur": "6px",
+                "spread": "0px",
+                "applyTo": "none"
+            },
+            "position": {
+                "top": "3%",
+                "left": "15%",
+                "zIndex": 1000,
+                "rotation": "0deg"
+            }
+        },
+        {
+            "name": "Special 2",
+            "image": "images/specials/special2.jpg",
+            "size": {
+                "width": "280px",
+                "height": "auto"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "18%",
+                "left": "15%",
+                "zIndex": 3,
+                "rotation": "8deg"
+            }
+        },
+        {
+            "name": "Special 3",
+            "image": "images/specials/special3.jpg",
+            "size": {
+                "width": "280px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "5%",
+                "left": "23%",
+                "zIndex": 1,
+                "rotation": "-3deg"
+            }
+        },
+        {
+            "name": "Special 4",
+            "image": "images/specials/special4.jpg",
+            "size": {
+                "width": "200px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "3%",
+                "left": "14%",
+                "zIndex": 2,
+                "rotation": "-14deg"
+            }
+        },
+        {
+            "name": "Special 5",
+            "image": "images/specials/special5.jpg",
+            "size": {
+                "width": "110px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "2%",
+                "left": "43%",
+                "zIndex": 5,
+                "rotation": "5deg"
+            }
+        },
+        {
+            "name": "Special 6",
+            "image": "images/specials/special6.png",
+            "size": {
+                "width": "210px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "content"
+            },
+            "position": {
+                "top": "27%",
+                "left": "40%",
+                "zIndex": 5,
+                "rotation": "-7deg"
+            }
+        },
+        {
+            "name": "Special 7",
+            "image": "images/specials/special7.png",
+            "size": {
+                "width": "400px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "content"
+            },
+            "position": {
+                "top": "49%",
+                "left": "38%",
+                "zIndex": 1,
+                "rotation": "0deg"
+            }
+        },
+        {
+            "name": "Special 8",
+            "image": "images/specials/special8.jpg",
+            "size": {
+                "width": "160px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "10%",
+                "left": "54%",
+                "zIndex": 4,
+                "rotation": "-11deg"
+            }
+        },
+        {
+            "name": "Special 9",
+            "image": "images/specials/special9.jpg",
+            "size": {
+                "width": "160px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "25%",
+                "left": "59%",
+                "zIndex": 3,
+                "rotation": "8deg"
+            }
+        },
+        {
+            "name": "Special 10",
+            "image": "images/specials/special10.jpg",
+            "size": {
+                "width": "autopx",
+                "height": "160px"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "50%",
+                "left": "45%",
+                "zIndex": 2,
+                "rotation": "-11deg"
+            }
+        },
+        {
+            "name": "Special 11",
+            "image": "images/specials/special11.jpg",
+            "size": {
+                "width": "95px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "3px",
+                "offsetY": "3px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "50%",
+                "left": "75%",
+                "zIndex": 2,
+                "rotation": "-1deg"
+            }
+        },
+        {
+            "name": "Special 12",
+            "image": "images/specials/special12.jpg",
+            "size": {
+                "width": "95px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "3px",
+                "offsetY": "3px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "53%",
+                "left": "78%",
+                "zIndex": 3,
+                "rotation": "3deg"
+            }
+        },
+        {
+            "name": "Special 13",
+            "image": "images/specials/special13.jpg",
+            "size": {
+                "width": "95px",
+                "height": "autopx"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "3px",
+                "offsetY": "3px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "all"
+            },
+            "position": {
+                "top": "58%",
+                "left": "80%",
+                "zIndex": 4,
+                "rotation": "-1deg"
+            }
+        },
+        {
+            "name": "Special 14",
+            "image": "images/specials/special14.png",
+            "size": {
+                "width": "autopx",
+                "height": "200px"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "none"
+            },
+            "position": {
+                "top": "58%",
+                "left": "70%",
+                "zIndex": 7,
+                "rotation": "7deg"
+            }
+        },
+        {
+            "name": "Special 15",
+            "image": "images/specials/special15.png",
+            "size": {
+                "width": "autopx",
+                "height": "200px"
+            },
+            "shadow": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
+                "spread": "0px",
+                "applyTo": "none"
+            },
+            "position": {
+                "top": "3%",
+                "left": "70%",
+                "zIndex": 7,
+                "rotation": "0deg"
+            }
+        }
+    ]
+}
