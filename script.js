@@ -5,6 +5,44 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   let canClick = false; // Initialiser l'état de clic à false
 
+ const specialImages = document.querySelectorAll(".special-image img");
+
+  // Fonction pour ajuster les images "Special 0" et "Special 1" pour qu'elles soient entièrement visibles
+  function adjustSpecialImagesForMobile() {
+    const deviceType = detectDevice();
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const isPortrait = height > width;
+
+    if (deviceType === "Smartphone" && isPortrait) {
+      specialImages.forEach((img, index) => {
+        if (index === 0 || index === 1) { // Pour Special 0 et Special 1
+          const imgNaturalWidth = img.naturalWidth;
+          const imgNaturalHeight = img.naturalHeight;
+
+          // Calculer les ratios de l'image et de l'écran
+          const widthRatio = width / imgNaturalWidth;
+          const heightRatio = height / imgNaturalHeight;
+          const scaleRatio = Math.min(widthRatio, heightRatio);
+
+          // Appliquer le ratio de redimensionnement pour que l'image soit entièrement visible
+          img.style.width = `${imgNaturalWidth * scaleRatio}px`;
+          img.style.height = `${imgNaturalHeight * scaleRatio}px`;
+
+          // Centrer l'image en maintenant sa position d'origine
+          img.parentElement.style.position = "absolute";
+          img.parentElement.style.top = "50%";
+          img.parentElement.style.left = "50%";
+          img.parentElement.style.transform = "translate(-50%, -50%)";
+        }
+      });
+    }
+  }
+
+  // Appeler cette fonction au chargement et au redimensionnement de la fenêtre
+  adjustSpecialImagesForMobile();
+  window.addEventListener("resize", adjustSpecialImagesForMobile);
+  
   // Détecter l'appareil
   function detectDevice() {
     const userAgent = navigator.userAgent.toLowerCase();
