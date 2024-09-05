@@ -176,3 +176,22 @@ body.enter-active .special-image {
 .popup-container.active {
     visibility: visible;
 }
+
+/* Style pour la bannière */
+#device-banner {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-family: 'Noto Sans Mono', monospace;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+#device-banner p {
+    margin: 0;
+    font-size: 16px;
+}
