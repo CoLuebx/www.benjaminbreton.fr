@@ -7,6 +7,10 @@
                 "width": "500px",
                 "height": "auto"
             },
+            "smartphone_size": {
+                "width": "90vw",
+                "height": "auto"
+            },
             "shadow": {
                 "color": "rgba(0, 0, 0, 0.2)",
                 "offsetX": "2px",
@@ -20,6 +24,12 @@
                 "left": "50%",
                 "zIndex": 1000,
                 "rotation": "0deg"
+            },
+            "smartphone_position": {
+                "top": "20%",
+                "left": "50%",
+                "zIndex": 1000,
+                "rotation": "0deg"
             }
         },
         {
@@ -27,6 +37,10 @@
             "image": "images/specials/special1.png",
             "size": {
                 "width": "90px",
+                "height": "auto"
+            },
+            "smartphone_size": {
+                "width": "90vw",
                 "height": "auto"
             },
             "shadow": {
@@ -40,6 +54,12 @@
             "position": {
                 "top": "3%",
                 "left": "15%",
+                "zIndex": 1000,
+                "rotation": "0deg"
+            },
+            "smartphone_position": {
+                "top": "20%",
+                "left": "50%",
                 "zIndex": 1000,
                 "rotation": "0deg"
             }
