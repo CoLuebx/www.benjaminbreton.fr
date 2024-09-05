@@ -7,12 +7,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
  const specialImages = document.querySelectorAll(".special-image img");
 
-  // Fonction pour ajuster les images "Special 0" et "Special 1" pour qu'elles soient entièrement visibles
+  // Fonction pour ajuster les images "Special 0" et "Special 1" pour qu'elles soient entièrement visibles avec des marges
   function adjustSpecialImagesForMobile() {
     const deviceType = detectDevice();
     const width = window.innerWidth;
     const height = window.innerHeight;
     const isPortrait = height > width;
+
+    // Marges définies (10% de chaque côté pour cet exemple)
+    const marginHorizontal = width * 0.1; // 10% de la largeur de l'écran
+    const marginVertical = height * 0.1; // 10% de la hauteur de l'écran
 
     if (deviceType === "Smartphone" && isPortrait) {
       specialImages.forEach((img, index) => {
@@ -20,20 +24,23 @@ document.addEventListener("DOMContentLoaded", function () {
           const imgNaturalWidth = img.naturalWidth;
           const imgNaturalHeight = img.naturalHeight;
 
-          // Calculer les ratios de l'image et de l'écran
-          const widthRatio = width / imgNaturalWidth;
-          const heightRatio = height / imgNaturalHeight;
+          // Calculer l'espace disponible en tenant compte des marges
+          const availableWidth = width - 2 * marginHorizontal;
+          const availableHeight = height - 2 * marginVertical;
+
+          // Calculer les ratios de redimensionnement pour s'assurer que l'image tient dans l'espace disponible
+          const widthRatio = availableWidth / imgNaturalWidth;
+          const heightRatio = availableHeight / imgNaturalHeight;
           const scaleRatio = Math.min(widthRatio, heightRatio);
 
-          // Appliquer le ratio de redimensionnement pour que l'image soit entièrement visible
+          // Appliquer le ratio de redimensionnement pour que l'image soit visible
           img.style.width = `${imgNaturalWidth * scaleRatio}px`;
           img.style.height = `${imgNaturalHeight * scaleRatio}px`;
 
-          // Centrer l'image en maintenant sa position d'origine
+          // Centrer l'image en prenant en compte les marges
           img.parentElement.style.position = "absolute";
-          img.parentElement.style.top = "50%";
-          img.parentElement.style.left = "50%";
-          img.parentElement.style.transform = "translate(-50%, -50%)";
+          img.parentElement.style.top = `${marginVertical}px`; // Marges verticales
+          img.parentElement.style.left = `${marginHorizontal}px`; // Marges horizontales
         }
       });
     }
