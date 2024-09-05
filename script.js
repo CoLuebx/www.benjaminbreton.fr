@@ -22,20 +22,26 @@ document.addEventListener("DOMContentLoaded", function () {
       deviceType = "Ordinateur";
     }
 
+    console.log(`Appareil détecté : ${deviceType}`); // Afficher le device dans la console
     return deviceType;
   }
 
-  // Créer et afficher la bannière
-  function displayBanner() {
-    const deviceType = detectDevice();
-    const banner = document.createElement("div");
-    banner.id = "device-banner";
-    banner.innerHTML = `<p>Appareil détecté : ${deviceType}</p>`;
-    document.body.prepend(banner); // Ajouter la bannière en haut du body
+  // Détecter l'orientation et la résolution de l'écran
+  function detectOrientationAndResolution() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const orientation = width > height ? "Paysage" : "Portrait";
+    console.log(`Résolution détectée : ${orientation} ${width}x${height}`); // Afficher la résolution et orientation dans la console
   }
 
-  // Appel de la fonction pour afficher la bannière
-  displayBanner();
+  // Appel de la fonction pour afficher dans la console
+  detectDevice();
+  detectOrientationAndResolution();
+
+  // Mettre à jour la résolution et orientation si la fenêtre est redimensionnée
+  window.addEventListener("resize", function () {
+    detectOrientationAndResolution();
+  });
 
   // Écouter le clic sur le bouton "Entrer"
   enterButton.addEventListener("click", function () {
@@ -45,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Masquer le bouton après le clic
     enterButton.style.display = "none";
   });
-  
+
   // Créer et insérer le popup dans le HTML
   const popupContainer = document.createElement("div");
   popupContainer.classList.add("popup-container");
@@ -98,6 +104,36 @@ document.addEventListener("DOMContentLoaded", function () {
   arrowRight.addEventListener("click", function () {
     currentImageIndex = (currentImageIndex + 1) % carouselImages.length;
     updateCarousel();
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const specialImages = document.querySelectorAll(".special-image");
+
+    function adjustSpecialImagesForMobile() {
+      const deviceType = detectDevice();
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const isPortrait = height > width;
+
+      // Appliquer uniquement pour les smartphones en mode portrait
+      if (deviceType === "Smartphone" && isPortrait) {
+        specialImages.forEach((image, index) => {
+          if (index === 0 || index === 1) {
+            // Special 0 et Special 1
+            image.style.width = "90vw"; // Redimensionner pour être visible
+            image.style.height = "auto";
+            image.style.position = "absolute";
+            image.style.top = "10%"; // Conserver l'emplacement
+            image.style.left = "50%";
+            image.style.transform = "translate(-50%, 0)";
+          }
+        });
+      }
+    }
+
+    // Appeler cette fonction au chargement et au redimensionnement de la fenêtre
+    adjustSpecialImagesForMobile();
+    window.addEventListener("resize", adjustSpecialImagesForMobile);
   });
 
   // Charger les images avec une position initiale au centre et rotation 0
