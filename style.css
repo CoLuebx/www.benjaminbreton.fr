@@ -22,6 +22,13 @@ h1 {
     margin-bottom: 1px;
 }
 
+/* Version smartphone : Ajuster la taille du texte */
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 20px; /* Taille de police réduite pour les smartphones */
+    }
+}
+
 /* Corps de la page */
 body, html {
     margin: 0;
