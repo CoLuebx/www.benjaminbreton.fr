@@ -5,88 +5,64 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   let canClick = false; // Initialiser l'état de clic à false
 
- const specialImages = document.querySelectorAll(".special-image img");
+  const specialImages = document.querySelectorAll(".special-image img");
 
-  // Fonction pour ajuster les images "Special 0" et "Special 1" pour qu'elles soient entièrement visibles avec des marges
-  function adjustSpecialImagesForMobile() {
-    const deviceType = detectDevice();
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const isPortrait = height > width;
-
-    // Marges définies (10% de chaque côté pour cet exemple)
-    const marginHorizontal = width * 0.1; // 10% de la largeur de l'écran
-    const marginVertical = height * 0.1; // 10% de la hauteur de l'écran
-
-    if (deviceType === "Smartphone" && isPortrait) {
-      specialImages.forEach((img, index) => {
-        if (index === 0 || index === 1) { // Pour Special 0 et Special 1
-          const imgNaturalWidth = img.naturalWidth;
-          const imgNaturalHeight = img.naturalHeight;
-
-          // Calculer l'espace disponible en tenant compte des marges
-          const availableWidth = width - 2 * marginHorizontal;
-          const availableHeight = height - 2 * marginVertical;
-
-          // Calculer les ratios de redimensionnement pour s'assurer que l'image tient dans l'espace disponible
-          const widthRatio = availableWidth / imgNaturalWidth;
-          const heightRatio = availableHeight / imgNaturalHeight;
-          const scaleRatio = Math.min(widthRatio, heightRatio);
-
-          // Appliquer le ratio de redimensionnement pour que l'image soit visible
-          img.style.width = `${imgNaturalWidth * scaleRatio}px`;
-          img.style.height = `${imgNaturalHeight * scaleRatio}px`;
-
-          // Centrer l'image en prenant en compte les marges
-          img.parentElement.style.position = "absolute";
-          img.parentElement.style.top = `${marginVertical}px`; // Marges verticales
-          img.parentElement.style.left = `${marginHorizontal}px`; // Marges horizontales
-        }
-      });
-    }
-  }
-
-  // Appeler cette fonction au chargement et au redimensionnement de la fenêtre
-  adjustSpecialImagesForMobile();
-  window.addEventListener("resize", adjustSpecialImagesForMobile);
-  
-  // Détecter l'appareil
   function detectDevice() {
     const userAgent = navigator.userAgent.toLowerCase();
-    let deviceType = "";
-
     if (
       /mobile|android|touch|webos|iphone|ipod|blackberry|iemobile|opera mini/.test(
         userAgent
       )
     ) {
-      deviceType = "Smartphone";
+      return "Smartphone";
     } else if (/tablet|ipad|playbook|silk/.test(userAgent)) {
-      deviceType = "Tablette";
+      return "Tablette";
     } else {
-      deviceType = "Ordinateur";
+      return "Ordinateur";
     }
-
-    console.log(`Appareil détecté : ${deviceType}`); // Afficher le device dans la console
-    return deviceType;
   }
 
-  // Détecter l'orientation et la résolution de l'écran
-  function detectOrientationAndResolution() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const orientation = width > height ? "Paysage" : "Portrait";
-    console.log(`Résolution détectée : ${orientation} ${width}x${height}`); // Afficher la résolution et orientation dans la console
+  function loadInitialImages() {
+    fetch("data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        const deviceType = detectDevice();
+        const images = data.specialImages;
+
+        images.forEach((image, index) => {
+          const imageDiv = document.createElement("div");
+          imageDiv.classList.add("special-image");
+
+          const imgElement = new Image();
+          imgElement.src = image.image;
+          imgElement.alt = image.name;
+
+          // Appliquer la taille et la position selon l'appareil
+          if (deviceType === "Smartphone") {
+            imgElement.style.width = image.smartphone_size.width;
+            imgElement.style.height = image.smartphone_size.height;
+            imageDiv.style.top = image.smartphone_position.top;
+            imageDiv.style.left = image.smartphone_position.left;
+            imageDiv.style.zIndex = image.smartphone_position.zIndex;
+            imageDiv.style.transform = `rotate(${image.smartphone_position.rotation})`;
+          } else {
+            imgElement.style.width = image.size.width;
+            imgElement.style.height = image.size.height;
+            imageDiv.style.top = image.position.top;
+            imageDiv.style.left = image.position.left;
+            imageDiv.style.zIndex = image.position.zIndex;
+            imageDiv.style.transform = `rotate(${image.position.rotation})`;
+          }
+
+          // Ajouter l'image à son conteneur
+          imageDiv.appendChild(imgElement);
+          specialImagesContainer.appendChild(imageDiv);
+        });
+      })
+      .catch((error) =>
+        console.error("Erreur lors du chargement des données JSON:", error)
+      );
   }
-
-  // Appel de la fonction pour afficher dans la console
-  detectDevice();
-  detectOrientationAndResolution();
-
-  // Mettre à jour la résolution et orientation si la fenêtre est redimensionnée
-  window.addEventListener("resize", function () {
-    detectOrientationAndResolution();
-  });
 
   // Écouter le clic sur le bouton "Entrer"
   enterButton.addEventListener("click", function () {
