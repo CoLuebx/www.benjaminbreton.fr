@@ -5,6 +5,47 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   let canClick = false; // Initialiser l'état de clic à false
 
+  // Détecter l'appareil
+  function detectDevice() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    let deviceType = "";
+
+    if (
+      /mobile|android|touch|webos|iphone|ipod|blackberry|iemobile|opera mini/.test(
+        userAgent
+      )
+    ) {
+      deviceType = "Smartphone";
+    } else if (/tablet|ipad|playbook|silk/.test(userAgent)) {
+      deviceType = "Tablette";
+    } else {
+      deviceType = "Ordinateur";
+    }
+
+    return deviceType;
+  }
+
+  // Créer et afficher la bannière
+  function displayBanner() {
+    const deviceType = detectDevice();
+    const banner = document.createElement("div");
+    banner.id = "device-banner";
+    banner.innerHTML = `<p>Appareil détecté : ${deviceType}</p>`;
+    document.body.prepend(banner); // Ajouter la bannière en haut du body
+  }
+
+  // Appel de la fonction pour afficher la bannière
+  displayBanner();
+
+  // Écouter le clic sur le bouton "Entrer"
+  enterButton.addEventListener("click", function () {
+    document.body.classList.add("enter-active");
+    canClick = true; // Activer le clic sur les images
+
+    // Masquer le bouton après le clic
+    enterButton.style.display = "none";
+  });
+  
   // Créer et insérer le popup dans le HTML
   const popupContainer = document.createElement("div");
   popupContainer.classList.add("popup-container");
