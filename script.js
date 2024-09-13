@@ -3,33 +3,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const specialImagesContainer = document.getElementById(
     "special-images-container"
   );
-  let canClick = false; // Initialiser l'état de clic à false
 
-  const specialImages = document.querySelectorAll(".special-image img");
+  // 1. Détection du device et stockage du résultat
+  let currentMode = detectDevice(); // Stocker "smartphone" ou "desktop"
+  console.log("Current device mode:", currentMode);
 
+  // Fonction de détection de l'appareil
   function detectDevice() {
     const userAgent = navigator.userAgent.toLowerCase();
-    if (
-      /mobile|android|touch|webos|iphone|ipod|blackberry|iemobile|opera mini/.test(
-        userAgent
-      )
-    ) {
-      return "Smartphone";
-    } else if (/tablet|ipad|playbook|silk/.test(userAgent)) {
-      return "Tablette";
+    if (/mobile|android|iphone|ipod/.test(userAgent)) {
+      console.log("Device detected: Smartphone");
+      return "smartphone";
     } else {
-      return "Ordinateur";
+      console.log("Device detected: Desktop");
+      return "desktop";
     }
   }
 
+  // 2. Charger les images et les afficher au centre avec une taille réduite
   function loadInitialImages() {
     fetch("data.json")
       .then((response) => response.json())
       .then((data) => {
-        const deviceType = detectDevice();
         const images = data.specialImages;
+        specialImagesContainer.innerHTML = ""; // Vider les anciennes images
 
-        images.forEach((image, index) => {
+        images.forEach((image) => {
           const imageDiv = document.createElement("div");
           imageDiv.classList.add("special-image");
 
@@ -37,26 +36,57 @@ document.addEventListener("DOMContentLoaded", function () {
           imgElement.src = image.image;
           imgElement.alt = image.name;
 
-          // Appliquer la taille et la position selon l'appareil
-          if (deviceType === "Smartphone") {
-            imgElement.style.width = image.smartphone_size.width;
-            imgElement.style.height = image.smartphone_size.height;
-            imageDiv.style.top = image.smartphone_position.top;
-            imageDiv.style.left = image.smartphone_position.left;
-            imageDiv.style.zIndex = image.smartphone_position.zIndex;
-            imageDiv.style.transform = `rotate(${image.smartphone_position.rotation})`;
-          } else {
-            imgElement.style.width = image.size.width;
-            imgElement.style.height = image.size.height;
-            imageDiv.style.top = image.position.top;
-            imageDiv.style.left = image.position.left;
-            imageDiv.style.zIndex = image.position.zIndex;
-            imageDiv.style.transform = `rotate(${image.position.rotation})`;
-          }
+          // Les images commencent au centre avec une taille réduite
+          imgElement.style.width = `calc(${image.size.width} / 2)`;
+          imgElement.style.height = `calc(${image.size.height} / 2)`;
+          imageDiv.style.position = "absolute";
+          imageDiv.style.top = "50%";
+          imageDiv.style.left = "50%";
+          imageDiv.style.transform = "translate(-50%, -50%) rotate(0deg)";
+          imageDiv.style.zIndex = image.position.zIndex;
 
-          // Ajouter l'image à son conteneur
+          // Ajouter l'image au conteneur
           imageDiv.appendChild(imgElement);
           specialImagesContainer.appendChild(imageDiv);
+        });
+      })
+      .catch((error) =>
+        console.error("Erreur lors du chargement des données JSON:", error)
+      );
+  }
+
+  // 3. Déplacer les images vers leurs positions finales après le clic sur "Entrer"
+  function moveImagesToFinalPosition() {
+    const images = document.querySelectorAll(".special-image");
+
+    fetch("data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        const positions = data.specialImages;
+
+        images.forEach((imageDiv, index) => {
+          const finalPosition = positions[index];
+          const imgElement = imageDiv.querySelector("img");
+
+          // Appliquer les positions, tailles et rotations finales selon le mode
+          if (currentMode === "smartphone") {
+            // Mode smartphone
+            imageDiv.style.top = finalPosition.smartphone_position.top;
+            imageDiv.style.left = finalPosition.smartphone_position.left;
+            imgElement.style.width = finalPosition.smartphone_size.width;
+            imgElement.style.height = finalPosition.smartphone_size.height;
+            imageDiv.style.transform = `rotate(${finalPosition.smartphone_position.rotation})`;
+          } else {
+            // Mode desktop
+            imageDiv.style.top = finalPosition.position.top;
+            imageDiv.style.left = finalPosition.position.left;
+            imgElement.style.width = finalPosition.size.width;
+            imgElement.style.height = finalPosition.size.height;
+            imageDiv.style.transform = `rotate(${finalPosition.position.rotation})`;
+          }
+
+          // Appliquer une transition fluide pour les déplacements
+          imageDiv.style.transition = "all 1s ease";
         });
       })
       .catch((error) =>
@@ -129,28 +159,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("DOMContentLoaded", function () {
     const specialImages = document.querySelectorAll(".special-image");
-
-    function adjustSpecialImagesForMobile() {
-      const deviceType = detectDevice();
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const isPortrait = height > width;
-
-      // Appliquer uniquement pour les smartphones en mode portrait
-      if (deviceType === "Smartphone" && isPortrait) {
-        specialImages.forEach((image, index) => {
-          if (index === 0 || index === 1) {
-            // Special 0 et Special 1
-            image.style.width = "90vw"; // Redimensionner pour être visible
-            image.style.height = "auto";
-            image.style.position = "absolute";
-            image.style.top = "10%"; // Conserver l'emplacement
-            image.style.left = "50%";
-            image.style.transform = "translate(-50%, 0)";
-          }
-        });
-      }
-    }
 
     // Appeler cette fonction au chargement et au redimensionnement de la fenêtre
     adjustSpecialImagesForMobile();
@@ -240,26 +248,34 @@ document.addEventListener("DOMContentLoaded", function () {
           const finalPosition = positions[index];
           const imgElement = imageDiv.querySelector("img");
 
-          // Appliquer les positions, la rotation, et la taille finales après l'animation
-          imageDiv.style.top = finalPosition.position.top;
-          imageDiv.style.left = finalPosition.position.left;
-          imageDiv.style.transform = `rotate(${finalPosition.position.rotation})`;
+          // Appliquer les positions, rotations et tailles selon currentMode
+          if (currentMode === "smartphone") {
+            // Mode smartphone
+            imageDiv.style.top = finalPosition.smartphone_position.top;
+            imageDiv.style.left = finalPosition.smartphone_position.left;
+            imageDiv.style.transform = `rotate(${finalPosition.smartphone_position.rotation})`;
 
-          // Restaurer la taille normale pour les images autres que Special 0 et Special 1
-          if (index > 1) {
+            imgElement.style.width = finalPosition.smartphone_size.width;
+            imgElement.style.height = finalPosition.smartphone_size.height;
+          } else {
+            // Mode desktop
+            imageDiv.style.top = finalPosition.position.top;
+            imageDiv.style.left = finalPosition.position.left;
+            imageDiv.style.transform = `rotate(${finalPosition.position.rotation})`;
+
             imgElement.style.width = finalPosition.size.width;
             imgElement.style.height = finalPosition.size.height;
           }
 
-          // Appliquer le z-index final pour Special 0 et Special 1
+          // Appliquer le z-index pour les images autres que Special 0 et Special 1
           if (index !== 0 && index !== 1) {
             imageDiv.style.zIndex = finalPosition.position.zIndex;
           }
         });
       })
-      .catch((error) =>
-        console.error("Erreur lors du chargement des données JSON:", error)
-      );
+      .catch((error) => {
+        console.error("Erreur lors du chargement des données JSON:", error);
+      });
   }
 
   // Fonction pour rendre toutes les images visibles au centre
