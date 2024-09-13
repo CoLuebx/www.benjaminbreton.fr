@@ -8,14 +8,14 @@
                 "height": "auto"
             },
             "smartphone_size": {
-                "width": "90vw",
+                "width": "50vw",
                 "height": "auto"
             },
             "shadow": {
                 "color": "rgba(0, 0, 0, 0.2)",
-                "offsetX": "2px",
-                "offsetY": "4px",
-                "blur": "6px",
+                "offsetX": "1px",
+                "offsetY": "1px",
+                "blur": "1px",
                 "spread": "0px",
                 "applyTo": "none"
             },
@@ -26,8 +26,8 @@
                 "rotation": "0deg"
             },
             "smartphone_position": {
-                "top": "20%",
-                "left": "50%",
+                "top": "200%",
+                "left": "42%",
                 "zIndex": 1000,
                 "rotation": "0deg"
             }
@@ -40,7 +40,7 @@
                 "height": "auto"
             },
             "smartphone_size": {
-                "width": "90vw",
+                "width": "15vw",
                 "height": "auto"
             },
             "shadow": {
@@ -58,10 +58,10 @@
                 "rotation": "0deg"
             },
             "smartphone_position": {
-                "top": "20%",
-                "left": "50%",
+                "top": "-15%",
+                "left": "45%",
                 "zIndex": 1000,
-                "rotation": "0deg"
+                "rotation": "90deg"
             }
         },
         {
@@ -69,6 +69,10 @@
             "image": "images/specials/special2.jpg",
             "size": {
                 "width": "280px",
+                "height": "auto"
+            },
+            "smartphone_size": {
+                "width": "50vw",
                 "height": "auto"
             },
             "shadow": {
@@ -84,6 +88,12 @@
                 "left": "15%",
                 "zIndex": 3,
                 "rotation": "8deg"
+            },
+            "smartphone_position": {
+                "top": "8%",
+                "left": "10%",
+                "zIndex": 3,
+                "rotation": "2deg"
             }
         },
         {
@@ -92,6 +102,10 @@
             "size": {
                 "width": "280px",
                 "height": "autopx"
+            },
+            "smartphone_size": {
+                "width": "50vw",
+                "height": "auto"
             },
             "shadow": {
                 "color": "rgba(0, 0, 0, 0.5)",
@@ -106,6 +120,12 @@
                 "left": "23%",
                 "zIndex": 1,
                 "rotation": "-3deg"
+            },
+            "smartphone_position": {
+                "top": "15%",
+                "left": "40%",
+                "zIndex": 3,
+                "rotation": "-5deg"
             }
         },
         {
